@@ -1,0 +1,84 @@
+.Page{
+    width: 100vw;
+    min-height: 100vh;
+    background-image: url("https://images-assets.nasa.gov/image/iss043e256340/iss043e256340~medium.jpg");
+    background-size: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title{
+    color: white;
+    font-size: 4rem;
+    margin-top: 15vh;
+}
+
+.title span{
+    background: linear-gradient(to top, #0095ff67 10%, transparent 50%);
+}
+
+.hashtag-container{
+    display: flex;
+    flex-direction: row;
+    width: 80vw;
+    justify-content: space-evenly;
+    margin-top: 5vh;
+}
+
+.hashtag{
+    font-weight: 500;
+    color: white;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+
+.hashtag:hover{
+    scale: 1.1;
+}
+
+.search{
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    width: 40vw;
+    align-items: center;
+    border-radius: 5px;
+    margin-top: 5vh;
+}
+
+.search svg{
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-left: 1rem;
+}
+
+.search input{
+    font-size: 1.2rem;
+    font-weight: 500;
+    width: 100%;
+    padding: 1em;
+    border: none;
+    border-radius: 5px;
+}
+
+.search input:focus{
+    outline: none;
+}
+
+
+.discoverbtn{
+    background-color: white;
+    color: #474747;
+    font-size: 1.25rem;
+    padding: 0.75rem 3.5rem;
+    border: none;
+    border-radius: 5px;
+    margin-top: 5vh;
+    cursor: pointer;
+}
+
+.discoverbtn:hover{
+    scale: 1.1;
+}
