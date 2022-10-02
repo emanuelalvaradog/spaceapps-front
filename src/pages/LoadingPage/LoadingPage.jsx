@@ -9,16 +9,18 @@ export function LoadingPage() {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, uid, prompt } = useSelector((store) => store.images);  
+  const { loading, uid, prompt, error } = useSelector((store) => store.images);  
 
   useEffect(() => {
     dispatch(postUserInput());
   }, []);
 
-
   useEffect(() => {
-    if (!loading && uid) navigate(`/share=${uid}`);
+    if (!loading && uid && !error) navigate(`/share=${uid}`);
   }, [loading, uid]);
 
-  return <LoadingComponent text={prompt} />;
+
+  if(error) return <LoadingComponent text={"Looks like you're searching in the wrong galaxy"} />
+
+  return <LoadingComponent text={prompt} />
 }

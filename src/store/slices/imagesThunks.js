@@ -1,4 +1,4 @@
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDoc, doc } from "firebase/firestore";
 import { FireDB } from "../../firebase/firebase.js";
 import { setImages } from "./imagesSlice";
 
@@ -13,8 +13,8 @@ const getRandNum = (max) => {
 
 export function postUserInput() {
   return async (dispatch, getState) => {
-    const { userInput, artist } = getState();
-    const NasaAPI = `https://images-api.nasa.gov/search?q=${userInput}`;
+    const { artist, prompt } = getState().images;
+    const NasaAPI = `https://images-api.nasa.gov/search?q=${prompt}`;
     const ServerAPI = "https://moonatics.azurewebsites.net/query?data=";
     const imagesState = {
       images: [],
@@ -55,7 +55,8 @@ export function postUserInput() {
 
       dispatch(setImages({ ...imagesState, uid: newDocRef.id }));
     } catch (e) {
-      imagesState = { images: [], uid: "", artist, prompt loading: false, error: true };
+      imagesState = { images: [], uid: "", artist: artist, prompt, loading: false, error: true };
+      dispatch(setImages(imagesState))
     }
   };
 }
@@ -63,31 +64,29 @@ export function postUserInput() {
 export function getImagesFromUid(uid) {
   return async (dispatch) => {
     // GET DATA FROM FIRESTORE
+    let imagesState = { images: [], uid, artist: "", prompt: "", loading: true, error: false };
+    try {  
+      const docRef = doc(FireDB, "data", uid)
+      const docSnap = await getDoc(docRef)
 
-    const URL = `https://iURL?uid=${uid}`;
-    let imagesState = { images: [], uid: "", loading: true, error: false };
+      
+      if(docSnap.exists()) {
+        const {userPrompt, images, artist} = {...docSnap.data()}
+        imagesState = {
+          images, uid, artist, prompt: userPrompt, loading: false, error: false
+        }
+      } else {
+        console.log("DOESNT EXIST")
+      }
 
-    setTimeout(() => {
-      imagesState = {
-        images: ["img1UID", "img2UID", "img3UID"],
-        uid: "mars and rovers",
-        loading: false,
-        error: false,
-      };
-      dispatch(setImages(imagesState));
-    }, 5000);
+      dispatch(setImages(imagesState))
 
-    // try {
-    //   const resData = fetchJSONData(URL);
-    //   imagesState = {
-    //     images: resData,
-    //     uid: resData.uid,
-    //     loading: false,
-    //     error: false
-    //   }
-    //  dispatch(setImages(imagesState))
-    // } catch(e) {
-    //   imagesState = {images: [], uid: "", loading: false, error: true}
-    // }
+    } catch (error) {
+      imagesState.loading = false;
+      imagesState.error = true;
+      console.log(error);
+      
+      dispatch(setImages((imagesState)))
+    }
   };
 }

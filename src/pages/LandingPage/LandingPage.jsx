@@ -41,6 +41,7 @@ export function LandingPage() {
       <div className="search">
         <h1>See</h1>
         <input
+          required={true}
           type="text"
           placeholder="mars and rovers"
           value={inputValue}

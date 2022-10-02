@@ -51,24 +51,32 @@ body {
   overflow: hidden;
 }
 
+.mainContainer {
+  width: 100%;
+  min-height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
 .resultStars {
-  min-height: 100vh;
+  height: 100%;
+  position: absolute;
   width: 100%;
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #191f24 100%);
-  overflow: hidden;
   @include translate50;
 }
 
 .resultText {
   &Container {
+    padding: 6rem 0 4rem 0;
     position: absolute;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     z-index: 100;
+    overflow: scroll;
   }
 
   &Title {
@@ -77,6 +85,7 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
+    width: 90%;
 
     h1 {
       color: white;
@@ -84,39 +93,50 @@ body {
       letter-spacing: 0.1rem;
     }
 
+      span {
+        background: linear-gradient(to top, #8f42b2 10%, transparent 50%);
+      }
     button {
       margin-top: 1rem;
-      width: 60%;
-      height: 2rem;
+      width: 40%;
+      height: 3rem;
       background-color: #8f42b2;
       border: none;
       color: white;
-      font-size: 1rem;
+      font-size: 1.2rem;
       font-weight: 500;
       border-radius: 0.6rem;
+      cursor: pointer;
     }
   }
 }
 
 .resultImages {
   margin-top: 6rem;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 1fr);
   align-items: center;
   gap: 4rem;
+
   .imageContainer {
     display: grid;
-    grid-template-columns: auto auto;
-    gap: 2rem;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    gap: 1rem;
     justify-content: center;
     align-items: center;
 
     &Img {
       display: grid;
       grid-template-columns: auto auto;
+      justify-content: center;
+      align-items: center;
       gap: 2rem;
-      p {
-        height: 4rem;
+
+      img {
+        border-radius: .4rem;
+        height: 18rem;
+        width: 18rem;
         background-color: white;
       }
     }
@@ -126,9 +146,6 @@ body {
         color: white;
       }
 
-      span {
-        background: linear-gradient(to top, #8f42b2 10%, transparent 50%);
-      }
     }
   }
 }
@@ -220,5 +237,72 @@ body {
   }
   100% {
     @include rotateBase;
+  }
+}
+
+@media(max-width:1024px) {
+  .resultText {
+    &Container {
+      padding: 4rem 0 4rem 0;
+    }
+
+    &Title {
+      h1 {
+        font-size: 2.6rem;
+      }
+
+      button {
+        height: 2.2rem;
+        font-size: 1rem;
+      }
+    }
+  } 
+}
+
+@media(max-width: 768px){
+  .resultImages {
+    .imageContainer {
+      img {
+        height: 12rem;
+        width: 12rem;
+      }
+    }
+  }
+}
+
+@media(max-width: 532px) {
+
+  .resultText {
+    &Container {
+      padding: 4rem 0 3rem 0;
+    }
+    &Title {
+      h1 {
+        font-size: 2.2rem;
+      }
+  
+      button {
+        width: 65%;
+        font-size: .9rem;
+      }
+    }
+  }
+  
+  .resultImages {
+    .imageContainer {
+      &Img {
+        gap: 1rem;
+        img {
+          height: 8.4rem;
+          width: 8.4rem;
+        }
+      }
+      
+      &Txt{
+        p {
+          font-size: .8rem;
+        }
+      }
+    }
   }
 }
