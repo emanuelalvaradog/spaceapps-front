@@ -1,17 +1,17 @@
 import "./ResultsComponent.scss";
 
-export function ResultsComponent({ text, images }) {
-
+export function ResultsComponent({ prompt, images, artist }) {
   async function handleShare() {
     const url = window.location.href;
+
     if (!navigator.canShare) {
       navigator.clipboard.writeText(url);
-      alert("URL copied to clipboard")
+      alert("URL copied to clipboard");
     } else {
       try {
         await navigator.share({
           title: "The Art in Our Worlds",
-          text: "Get to know the universe in a different perspective",
+          text: `Get to know the universe in the eyes of ${artist}`,
           url,
         });
       } catch (e) {
@@ -24,21 +24,23 @@ export function ResultsComponent({ text, images }) {
     <div className="resultStars">
       <div className="resultTextContainer">
         <div className="resultTextTitle">
-          <h1>{`"${text}"`}</h1>
+          <h1>{`"${prompt}"`}</h1>
           <button onClick={handleShare}>Share your experience</button>
-          
         </div>
         <div className="resultImages">
           {images.map((img) => {
             return (
               <div className="imageContainer">
                 <div className="imageContainerImg">
-                  <p key={img}>{img}</p>
-                  <p key={img}>{img}</p>
+                  <img src={img.originalURL} key={img.orignalURL} />
+                  <img
+                    src={`data:image/jpeg;base64,${img.cachedImage}`}
+                    key={img.cachedImage}
+                  />
                 </div>
                 <div className="imageContainerTxt">
                   <p>
-                    In style of <span>Picasso</span>
+                    In the eyes of <span>{artist}</span>
                   </p>
                 </div>
               </div>

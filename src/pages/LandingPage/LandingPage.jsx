@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setPrompt } from "../../store/slices/imagesSlice";
 import "./LandingPage.scss";
 
 export function LandingPage() {
   const [inputValue, setInputValue] = useState("");
   const [artistValue, setArtistValue] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   function handleInputChange(e) {
     const { value } = e.target;
@@ -19,7 +22,8 @@ export function LandingPage() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    navigate(`/search=${inputValue}?artist=${artistValue}`);
+    dispatch(setPrompt({ prompt: inputValue, artist: artistValue }));
+    navigate(`/search=${inputValue}`);
 
     // Call thunk to change store values
     // Pipeline:
@@ -44,16 +48,16 @@ export function LandingPage() {
         />
         <h1>In </h1>
         <select onChange={handleSelectChange}>
-          <option>Van Gogh</option>
+          <option default={true}>Van Gogh</option>
           <option>Da Vinci</option>
           <option>Picasso</option>
           <option>Salvador Dali</option>
         </select>
         <h1>eyes</h1>
+        <button onClick={handleSubmit} className="discoverbtn">
+          Discover
+        </button>
       </div>
-      <button onClick={handleSubmit} className="discoverbtn">
-        Discover
-      </button>
       <div id="stars"></div>
       <div id="stars2"></div>
       <div id="stars3"></div>

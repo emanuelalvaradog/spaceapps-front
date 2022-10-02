@@ -1,3 +1,5 @@
+import { collection, addDoc } from "firebase/firestore";
+import { FireDB } from "../../firebase/firebase.js";
 import { setImages } from "./imagesSlice";
 
 const fetchJSONData = async (URL) => {
@@ -5,40 +7,63 @@ const fetchJSONData = async (URL) => {
   return res.json();
 };
 
-export function postUserInput(userInput) {
+const getRandNum = (max) => {
+  return Math.floor(Math.random() * (max - 0 + 1)) + min;
+};
+
+export function postUserInput() {
   return async (dispatch, getState) => {
-    const URL = `http://apiURL?input=${userInput}`;
-    let imagesState = { images: [], uid: "", loading: true, error: false };
+    const { userInput, artist } = getState();
+    const NasaAPI = `https://images-api.nasa.gov/search?q=${userInput}`;
+    const ServerAPI = "https://moonatics.azurewebsites.net/query?data=";
+    const imagesState = {
+      images: [],
+      uid: "",
+      prompt,
+      artist,
+      loading: true,
+      error: false,
+    };
 
-    setTimeout(() => {
-      imagesState = {
-        images: ["img1", "img2", "img3"],
-        uid: userInput,
-        loading: false,
-        error: false,
-      };
+    const fetchRes = fetchJSONData(NasaAPI);
 
-      dispatch(setImages(imagesState));
-    }, 5000);
+    for (let i = 0; i < 3; i++) {
+      const num = getRandNum(fetchRes.items.length);
+      imagesState.images.push({
+        originalURL: fetchRes.items[num]?.links[0]?.href,
+        description: fetchRes.items[num]?.data?.description,
+        cachedImage: "",
+      });
+    }
 
-    // try{
-    //   const resData = fetchJSONData(URL)
+    imagesState.loading = false;
+    imagesState.error = false;
+    const b64Data = window.btoa(JSON.stringify(imagesState));
 
-    //   imagesState = {
-    //     images: resData.images,
-    //     uid: resData. uid,
-    //     loading: false,
-    //     error: false
-    //   }
+    try {
+      const resData = fetchJSONData(`${ServerAPI}${b64Data}`);
 
-    // } catch(e) {
-    //   imageState = {images: [], uid:"", loading: false, error: true}
-    // }
+      imagesState.images.map((obj, idx) => {
+        obj.cachedImage = resData.images[idx].cachedImage;
+      });
+
+      const newDocRef = await addDoc(collection(FireDB, "data"), {
+        images: imagesState.images,
+        userPrompt: prompt,
+        artist,
+      });
+
+      dispatch(setImages({ ...imagesState, uid: newDocRef.id }));
+    } catch (e) {
+      imagesState = { images: [], uid: "", artist, prompt loading: false, error: true };
+    }
   };
 }
 
 export function getImagesFromUid(uid) {
   return async (dispatch) => {
+    // GET DATA FROM FIRESTORE
+
     const URL = `https://iURL?uid=${uid}`;
     let imagesState = { images: [], uid: "", loading: true, error: false };
 

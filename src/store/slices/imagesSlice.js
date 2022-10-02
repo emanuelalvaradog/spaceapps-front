@@ -5,6 +5,8 @@ export const imagesSlice = createSlice({
   initialState: {
     images: [],
     uid: "",
+    prompt: "",
+    artist: "",
     loading: true,
     error: false,
   },
@@ -12,10 +14,15 @@ export const imagesSlice = createSlice({
     setImages(state, { payload }) {
       (state.images = payload.images),
         (state.uid = payload.uid),
+        (state.prompt = payload.prompt),
+        (state.artist = payload.artist),
         (state.loading = payload.loading),
         (state.error = payload.error);
+    },
+    setPrompt(state, { payload }) {
+      (state.prompt = payload.prompt), (state.artist = payload.artist);
     },
   },
 });
 
-export const { setImages } = imagesSlice.actions;
+export const { setImages, setPrompt } = imagesSlice.actions;

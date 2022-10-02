@@ -6,13 +6,11 @@ import { LoadingComponent, ResultsComponent } from "../../components";
 import "./ResultsPage.css";
 
 export function ResultsPage() {
-  const { uid, images } = useSelector((store) => store.images);
+  const { uid, images, artist } = useSelector((store) => store.images);
   const location = useLocation();
   const dispatch = useDispatch();
   const paramUID = location.pathname
     .split("/share=")[1]
-    .toLowerCase()
-    .replaceAll("%20", " ");
   
   useEffect(() => {
     if (paramUID !== uid) dispatch(getImagesFromUid(paramUID));
@@ -23,7 +21,7 @@ export function ResultsPage() {
       {images.length === 0 ? (
         <LoadingComponent text={loading} />
       ) : (
-        <ResultsComponent text={paramUID} images={images} />
+        <ResultsComponent text={paramUID} images={images} artist={artist} />
       )}
     </div>
   );

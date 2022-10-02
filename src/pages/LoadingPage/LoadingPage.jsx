@@ -5,26 +5,20 @@ import { postUserInput } from "../../store/slices/imagesThunks";
 import { LoadingComponent } from "../../components";
 import "./LoadingPage.css";
 
-export function LoadingPage({ userInput = "" }) {
+export function LoadingPage() {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading } = useSelector((store) => store.images);
-
-  if (!userInput) {
-    userInput = location.pathname
-      .split("/search=")[1]
-      .toLowerCase()
-      .replaceAll("%20", " ");
-  }
+  const { loading, uid, prompt } = useSelector((store) => store.images);  
 
   useEffect(() => {
-    dispatch(postUserInput(userInput));
-  });
+    dispatch(postUserInput());
+  }, []);
+
 
   useEffect(() => {
-    if (!loading) navigate(`/share=${userInput}`);
-  }, [loading]);
+    if (!loading && uid) navigate(`/share=${uid}`);
+  }, [loading, uid]);
 
-  return <LoadingComponent text={userInput} />;
+  return <LoadingComponent text={prompt} />;
 }
