@@ -34,7 +34,7 @@ export function ResultsComponent({ prompt, images, artist }) {
                   <div className="imageContainerImg">
                     <img src={img.originalURL} key={img.orignalURL} />
                     <img
-                      src={`data:image/jpeg;base64,${img.cachedImage}`}
+                      src={img.cachedImage}
                       key={img.cachedImage}
                     />
                   </div>

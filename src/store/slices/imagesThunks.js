@@ -20,7 +20,7 @@ export function postUserInput() {
       images: [],
       uid: "",
       prompt,
-      artist,
+      artist: `in the style of ${artist}`,
       loading: true,
       error: false,
     };
