@@ -76,7 +76,7 @@ export function postUserInput() {
       //   artist,
       // });
 
-      dispatch(setImages({ ...imagesState, uid: newDocRef.id }));
+      dispatch(setImages({ ...imagesState, uid: docid }));
     } catch (e) {
       imagesState = { images: [], uid: "", artist: artist, prompt, loading: false, error: true };
       dispatch(setImages(imagesState))
