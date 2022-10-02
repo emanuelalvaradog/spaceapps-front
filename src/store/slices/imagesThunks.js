@@ -2,9 +2,6 @@ import { collection, addDoc, getDoc, doc, setDoc } from "firebase/firestore";
 import { FireDB } from "../../firebase/firebase.js";
 import { setImages } from "./imagesSlice";
 
-import { useNavigate } from "react-router-dom";
-const navigate = useNavigate();
-
 
 const fetchJSONData = async (URL) => {
   const res = await fetch(URL);
@@ -80,11 +77,9 @@ export function postUserInput() {
       // });
 
       dispatch(setImages({ ...imagesState, uid: newDocRef.id }));
-      navigate(`/share=${docid}`);
     } catch (e) {
       imagesState = { images: [], uid: "", artist: artist, prompt, loading: false, error: true };
       dispatch(setImages(imagesState))
-      navigate(`/share=${docid}`);
     }
 
    });
