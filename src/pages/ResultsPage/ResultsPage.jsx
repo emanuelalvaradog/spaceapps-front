@@ -13,7 +13,7 @@ export function ResultsPage() {
     .split("/share=")[1]
     .toLowerCase()
     .replaceAll("%20", " ");
-
+  
   useEffect(() => {
     if (paramUID !== uid) dispatch(getImagesFromUid(paramUID));
   }, []);
@@ -21,7 +21,7 @@ export function ResultsPage() {
   return (
     <div className="results">
       {images.length === 0 ? (
-        <LoadingComponent text={paramUID} />
+        <LoadingComponent text={loading} />
       ) : (
         <ResultsComponent text={paramUID} images={images} />
       )}

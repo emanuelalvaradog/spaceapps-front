@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./LandingPage.css";
+import "./LandingPage.scss";
 
 export function LandingPage() {
   const [inputValue, setInputValue] = useState("");
+  const [artistValue, setArtistValue] = useState("");
   const navigate = useNavigate();
 
   function handleInputChange(e) {
@@ -11,9 +12,14 @@ export function LandingPage() {
     setInputValue(value);
   }
 
+  function handleSelectChange(e) {
+    const { value } = e.target;
+    setArtistValue(value);
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
-    navigate(`/search=${inputValue}`);
+    navigate(`/search=${inputValue}?artist=${artistValue}`);
 
     // Call thunk to change store values
     // Pipeline:
@@ -28,43 +34,29 @@ export function LandingPage() {
 
   return (
     <div className="Page">
-      <h1 className="title">
-        GET TO KNOW <span>NASA</span>
-      </h1>
-      <div className="hashtag-container">
-        <h2 className="hashtag">#moon</h2>
-        <h2 className="hashtag">#stars</h2>
-        <h2 className="hashtag">#rovers</h2>
-        <h2 className="hashtag">#earth</h2>
-        <h2 className="hashtag">#mars</h2>
-      </div>
-
       <div className="search">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="#10182B"
-          className="w-6 h-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-          />
-        </svg>
+        <h1>See</h1>
         <input
           type="text"
-          placeholder="Begin your search through the universe..."
+          placeholder="mars and rovers"
           value={inputValue}
           onChange={handleInputChange}
         />
+        <h1>In </h1>
+        <select onChange={handleSelectChange}>
+          <option>Van Gogh</option>
+          <option>Da Vinci</option>
+          <option>Picasso</option>
+          <option>Salvador Dali</option>
+        </select>
+        <h1>eyes</h1>
       </div>
-
       <button onClick={handleSubmit} className="discoverbtn">
         Discover
       </button>
+      <div id="stars"></div>
+      <div id="stars2"></div>
+      <div id="stars3"></div>
     </div>
   );
 }
