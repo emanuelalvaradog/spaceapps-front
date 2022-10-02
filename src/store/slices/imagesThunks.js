@@ -53,9 +53,9 @@ export function postUserInput() {
 
     console.log("imgs state: ", imagesState)
     const b64Data = window.btoa(JSON.stringify(imagesState));
-
+    console.log("Fetching: ", b64Data)
     try {
-      const resData = fetchJSONData(`${ServerAPI}${b64Data}`);
+      const resData = fetchJSONData(`${ServerAPI}"${b64Data}"`);
 
       imagesState.images.map((obj, idx) => {
         obj.cachedImage = resData.images[idx].cachedImage;
