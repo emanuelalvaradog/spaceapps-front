@@ -22,6 +22,7 @@ export function LandingPage() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if(!inputValue) return;
     dispatch(setPrompt({ prompt: inputValue, artist: artistValue }));
     navigate(`/search=${inputValue}`);
 
