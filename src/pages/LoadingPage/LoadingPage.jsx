@@ -9,9 +9,7 @@ export function LoadingPage({ userInput = "" }) {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading } = useSelector((store) => {
-    store.images;
-  });
+  const { loading } = useSelector((store) => store.images);
 
   if (!userInput) {
     userInput = location.pathname

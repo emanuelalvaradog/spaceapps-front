@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getImagesFromUid } from "../../store/slices/imagesThunks";
-import { LoadingComponent } from "../../components";
+import { LoadingComponent, ResultsComponent } from "../../components";
 import "./ResultsPage.css";
 
 export function ResultsPage() {
@@ -23,19 +23,7 @@ export function ResultsPage() {
       {images.length === 0 ? (
         <LoadingComponent text={paramUID} />
       ) : (
-        <>
-          <h1>{paramUID}</h1>
-          <button>Share your experience</button>
-          <div className="resultsImages">
-            {images.map((img) => {
-              return (
-                <div className="imageContainer">
-                  <p key={img}>{img}</p>
-                </div>
-              );
-            })}
-          </div>
-        </>
+        <ResultsComponent text={paramUID} images={images} />
       )}
     </div>
   );

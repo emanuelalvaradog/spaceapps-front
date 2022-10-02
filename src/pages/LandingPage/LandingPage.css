@@ -1,84 +1,119 @@
-.Page{
-    width: 100vw;
-    min-height: 100vh;
-    background-image: url("https://images-assets.nasa.gov/image/iss043e256340/iss043e256340~medium.jpg");
-    background-size: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.Page {
+  width: 100%;
+  height: 100vh;
+  background-image: url("https://images-assets.nasa.gov/image/iss043e256340/iss043e256340~medium.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.title{
-    color: white;
-    font-size: 4rem;
-    margin-top: 15vh;
+.title {
+  color: white;
+  font-size: 4rem;
+  margin-top: 15vh;
 }
 
-.title span{
-    background: linear-gradient(to top, #0095ff67 10%, transparent 50%);
+.title span {
+  background: linear-gradient(to top, #0095ff67 10%, transparent 50%);
 }
 
-.hashtag-container{
-    display: flex;
-    flex-direction: row;
-    width: 80vw;
-    justify-content: space-evenly;
-    margin-top: 5vh;
+.hashtag-container {
+  display: flex;
+  flex-direction: row;
+  width: 80vw;
+  justify-content: space-evenly;
+  margin-top: 5vh;
 }
 
-.hashtag{
-    font-weight: 500;
-    color: white;
-    opacity: 0.7;
-    cursor: pointer;
+.hashtag {
+  font-weight: 500;
+  color: white;
+  opacity: 0.7;
+  cursor: pointer;
 }
 
-
-.hashtag:hover{
-    scale: 1.1;
+.hashtag:hover {
+  scale: 1.1;
 }
 
-.search{
-    display: flex;
-    flex-direction: row;
-    background-color: white;
-    width: 40vw;
-    align-items: center;
-    border-radius: 5px;
-    margin-top: 5vh;
+.search {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  width: 50vw;
+  align-items: center;
+  border-radius: 5px;
+  margin-top: 5vh;
 }
 
-.search svg{
-    width: 1.5rem;
-    height: 1.5rem;
-    margin-left: 1rem;
+.search svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: 1rem;
 }
 
-.search input{
-    font-size: 1.2rem;
-    font-weight: 500;
+.search input {
+  font-size: 1.2rem;
+  font-weight: 500;
+  width: 100%;
+  padding: 1em;
+  border: none;
+  border-radius: 5px;
+}
+
+.search input:focus {
+  outline: none;
+}
+
+.discoverbtn {
+  background-color: white;
+  color: #474747;
+  font-size: 1.25rem;
+  padding: 0.75rem 3.5rem;
+  border: none;
+  border-radius: 5px;
+  margin-top: 5vh;
+  cursor: pointer;
+}
+
+.discoverbtn:hover {
+  scale: 1.1;
+}
+
+@media (max-width: 425px) {
+  .title {
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 5rem;
+  }
+
+  .hashtag-container {
     width: 100%;
-    padding: 1em;
-    border: none;
-    border-radius: 5px;
+  }
+
+  .hashtag {
+    font-size: 1rem;
+  }
+
+  .search {
+    width: 90%;
+  }
+
+  .search input {
+    font-size: 0.8rem;
+  }
+
+  .discoverbtn {
+    padding: 0.4rem 2rem;
+    font-size: 1rem;
+  }
 }
 
-.search input:focus{
-    outline: none;
-}
-
-
-.discoverbtn{
-    background-color: white;
-    color: #474747;
-    font-size: 1.25rem;
-    padding: 0.75rem 3.5rem;
-    border: none;
-    border-radius: 5px;
-    margin-top: 5vh;
-    cursor: pointer;
-}
-
-.discoverbtn:hover{
-    scale: 1.1;
+@media (max-width: 1024px) {
+  .search {
+    width: 80%;
+  }
 }
