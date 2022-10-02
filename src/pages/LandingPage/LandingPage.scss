@@ -65,31 +65,40 @@ body {
   position: absolute;
   text-align: center;
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  white-space: initial;
   align-items: center;
-  margin-top: 5vh;
-  gap: 8px;
+}
+
+.searchContainer {
+  width: 100%;
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
 .search h1 {
   color: white;
-  font-size: 1.8rem;
+  font-size: 3.8rem;
 }
 
 .search input {
+  width: 30%;
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.384);
-  font-size: 1.4rem;
+  // background-color: rgba(255, 255, 255, 0.384);
+  // border: none;
+  background-color: transparent;
+  border: solid 2px #8f42b2;
+  font-size: 1.6rem;
+  padding: .4rem;
   font-weight: 500;
-  padding: 0.2rem;
-  border: none;
   border-radius: 0.4rem;
+  color: rgb(48, 48, 48);
 }
 
 .search input::placeholder {
-  color: rgb(88, 88, 88);
+  color: rgb(150, 150, 150);
 }
 
 .search input:focus {
@@ -97,24 +106,27 @@ body {
 }
 
 .search select {
-  width: 40%;
+  width: 30%;
   text-align: center;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   padding: 0.2rem;
-  color: rgb(88, 88, 88);
-  background-color: rgba(255, 255, 255, 0.384);
-  border: none;
+  color: rgb(150, 150, 150);
+  // background-color: rgba(255, 255, 255, 0.384);
+  background-color: transparent;
+  border: solid 2px #8f42b2;
   border-radius: 0.4rem;
 }
 
 .discoverbtn {
-  background-color: white;
-  color: #474747;
+  background-color: transparent;
+  width: 20%;
+  color: white;
   font-size: 1.25rem;
-  padding: 0.75rem 3.5rem;
-  border: none;
-  border-radius: 5px;
-  margin-top: 5vh;
+  padding: 0.75rem 0;
+  border: solid 2px #8f42b2;
+  border-radius: .4rem;
+  font-weight: 600;
+  margin-top: 9vh;
   cursor: pointer;
 }
 
@@ -122,13 +134,25 @@ body {
   scale: 1.1;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 768px) {
+
+  .search h1 {
+    font-size: 2rem;
+  }
+
   .search input {
-    font-size: 0.8rem;
+    width: 60%;
+    font-size: 1rem;
+  }
+
+  .search select {
+    width: 60%;
+    font-size: 1rem;
   }
 
   .discoverbtn {
-    padding: 0.4rem 2rem;
+    width: 50%;
+    padding: .4rem 0;
     font-size: 1rem;
   }
 }

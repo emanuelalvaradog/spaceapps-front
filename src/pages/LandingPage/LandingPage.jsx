@@ -39,6 +39,7 @@ export function LandingPage() {
   return (
     <div className="Page">
       <div className="search">
+        <div className="searchContainer">
         <h1>See</h1>
         <input
           required={true}
@@ -49,15 +50,16 @@ export function LandingPage() {
         />
         <h1>In </h1>
         <select onChange={handleSelectChange}>
-          <option default={true}>Van Gogh</option>
-          <option>Da Vinci</option>
-          <option>Picasso</option>
-          <option>Salvador Dali</option>
+          <option default={true}>Van Gogh's</option>
+          <option>Da Vinci's</option>
+          <option>Picasso's</option>
+          <option>Salvador Dali's</option>
         </select>
         <h1>eyes</h1>
         <button onClick={handleSubmit} className="discoverbtn">
           Discover
         </button>
+        </div>
       </div>
       <div id="stars"></div>
       <div id="stars2"></div>
