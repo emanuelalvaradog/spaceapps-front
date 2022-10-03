@@ -6,7 +6,7 @@ import "./LandingPage.scss";
 
 export function LandingPage() {
   const [inputValue, setInputValue] = useState("");
-  const [artistValue, setArtistValue] = useState("");
+  const [artistValue, setArtistValue] = useState("Van Gogh's");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -22,7 +22,7 @@ export function LandingPage() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if(!inputValue) return;
+    if (!inputValue) return;
     dispatch(setPrompt({ prompt: inputValue, artist: artistValue }));
     navigate(`/search=${inputValue}`);
 
@@ -41,25 +41,25 @@ export function LandingPage() {
     <div className="Page">
       <div className="search">
         <div className="searchContainer">
-        <h1>See</h1>
-        <input
-          required={true}
-          type="text"
-          placeholder="mars and rovers"
-          value={inputValue}
-          onChange={handleInputChange}
-        />
-        <h1>In </h1>
-        <select onChange={handleSelectChange}>
-          <option default={true}>Van Gogh's</option>
-          <option>Da Vinci's</option>
-          <option>Picasso's</option>
-          <option>Salvador Dali's</option>
-        </select>
-        <h1>eyes</h1>
-        <button onClick={handleSubmit} className="discoverbtn">
-          Discover
-        </button>
+          <h1>See</h1>
+          <input
+            required={true}
+            type="text"
+            placeholder="mars and rovers"
+            value={inputValue}
+            onChange={handleInputChange}
+          />
+          <h1>In </h1>
+          <select onChange={handleSelectChange}>
+            <option default={true}>Van Gogh's</option>
+            <option>Da Vinci's</option>
+            <option>Picasso's</option>
+            <option>Salvador Dali's</option>
+          </select>
+          <h1>eyes</h1>
+          <button onClick={handleSubmit} className="discoverbtn">
+            Discover
+          </button>
         </div>
       </div>
       <div id="stars"></div>

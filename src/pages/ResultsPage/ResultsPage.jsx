@@ -6,27 +6,29 @@ import { LoadingComponent, ResultsComponent } from "../../components";
 import "./ResultsPage.css";
 
 export function ResultsPage() {
-  const { uid, images, artist, error, prompt } = useSelector((store) => store.images);
+  const { uid, images, artist, error, prompt } = useSelector(
+    (store) => store.images
+  );
   const location = useLocation();
   const dispatch = useDispatch();
-  const navigate = useNavigate()
-  const paramUID = location.pathname
-    .split("/share=")[1]
-  
+  const navigate = useNavigate();
+  const paramUID = location.pathname.split("/share=")[1];
+
   useEffect(() => {
-    if (paramUID !== uid) dispatch(getImagesFromUid(paramUID));
+    if (paramUID !== uid) navigate("/", { replace: true });
   }, []);
 
   useEffect(() => {
-    console.log("RESULTS ERROR", error)
-  }, [error])
-
+    // console.log("RESULTS ERROR", error)
+  }, [error]);
 
   return (
     <div className="results">
       {error ? (
         <LoadingComponent text={"Guess you're searching in the wrong galaxy"} />
-      ) : images.length === 0 ? <LoadingComponent text={"Loading"} /> : (
+      ) : images.length === 0 ? (
+        <LoadingComponent text={"Loading"} />
+      ) : (
         <ResultsComponent prompt={prompt} images={images} artist={artist} />
       )}
     </div>
